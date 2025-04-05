@@ -14,20 +14,14 @@ st.title("🧠 Customer Segmentation App")
 st.markdown("Built with KMeans and Random Forest")
 
 # Step 1: Load Kaggle Dataset
-st.subheader("📥 Downloading Dataset from Kaggle")
-if "kaggle.json" in os.listdir():
-    os.environ['KAGGLE_CONFIG_DIR'] = os.getcwd()
-    if not os.path.exists("data"):
-        os.mkdir("data")
-    if not os.path.exists("data/Mall_Customers.csv"):
-        os.system("kaggle datasets download -d vjchoudhary7/customer-segmentation-tutorial -p data")
-        with zipfile.ZipFile("data/customer-segmentation-tutorial.zip", 'r') as zip_ref:
-            zip_ref.extractall("data")
-        st.success("✅ Dataset downloaded and extracted!")
-    df = pd.read_csv("data/Mall_Customers.csv")
+data_path = "Online Retail.csv"
+
+if os.path.exists(data_path):
+    df = pd.read_csv(data_path)
+    st.success("✅ Dataset loaded successfully!")
     st.write(df.head())
 else:
-    st.warning("Please upload your `kaggle.json` file to start.")
+    st.warning(f"Please upload or add `{data_path}` to your project directory.")
 
 # Step 2: KMeans Clustering
 if "df" in locals():
