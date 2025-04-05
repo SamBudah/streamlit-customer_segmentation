@@ -14,45 +14,68 @@ import pickle
 import os
 
 # Set page configuration for a wider layout and custom theme
-st.set_page_config(page_title="Customer Segmentation Dashboard", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="TargetWise Analytics", layout="wide", initial_sidebar_state="expanded")
 
 # Custom CSS for styling
-st.markdown("""
-    <style>
-    .main {
-        background-color: #f0f2f6;
-        padding: 20px;
-    }
-    .stButton>button {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-    }
-    .stButton>button:hover {
-        background-color: #45a049;
-    }
-    .stSidebar {
-        background-color: #f0f2f6;
-    }
-    </style>
-""", unsafe_allow_html=True)
+st.markdown('''
+<style>
+/* Main content area */
+.main {
+    background-color: #f0f2f6;
+    padding: 20px;
+    color: #333333;
+}
+
+/* Ensure the main content area background is applied */
+.stApp {
+    background-color: #f0f2f6;
+    color: #333333;
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px
+}
+.stButton>button:hover {
+    background-color: #45a049
+}
+
+/* Sidebar */
+.stSidebar {
+    background-color: #d3d8e8;
+    color: #333333;
+}
+
+/* Ensure sidebar text is visible */
+.stSidebar .stMarkdown, .stSidebar .stSelectbox {
+    color: #333333;
+}
+
+/* Input fields and labels */
+label, .stNumberInput, .stSlider, .stSelectbox {
+    color: #333333;
+}
+</style>
+''', unsafe_allow_html=True)
 
 # Sidebar for navigation and settings
-st.sidebar.title("🧠 Customer Segmentation Dashboard")
+st.sidebar.title("🧠 TargetWise Analytics")
 st.sidebar.markdown("Built with KMeans and Random Forest")
 page = st.sidebar.selectbox("Navigate", ["Home", "Data Upload & Preprocessing", "Clustering", "Classification", "Insights & Recommendations"])
 
 # Main content
 if page == "Home":
-    st.title("🧠 Customer Segmentation Dashboard")
-    st.markdown("""
-    Welcome to the Customer Segmentation Dashboard! This app helps Kenyan cooperatives (Coop Affairs) segment customers for targeted marketing. 
+    st.title("🧠 TargetWise Analytics")
+    st.markdown('''
+    Welcome to TargetWise Analytics! This app helps cooperatives segment customers for targeted marketing. 
     - **Upload** your customer data.
     - **Preprocess** and clean the data.
     - **Cluster** customers using KMeans.
     - **Classify** new customers with a Random Forest model.
     - **Gain Insights** and recommendations for marketing strategies.
-    """)
+    ''')
 
 elif page == "Data Upload & Preprocessing":
     st.header("📂 Data Upload & Preprocessing")
@@ -202,16 +225,16 @@ elif page == "Insights & Recommendations":
     else:
         # Insights
         with st.expander("Insights", expanded=True):
-            st.write("""
+            st.write('''
             - **Cluster 0**: Moderate precision and recall, indicating potential overlap with other segments. Marketing strategies should focus on distinguishing this segment more clearly.
             - **Cluster 1**: High recall and precision, making it the most consistently identified group. This segment is highly predictable, possibly indicating loyal or consistent purchasing behavior.
             - **Cluster 2**: Although the smallest group, it maintained high precision and recall, suggesting a niche but well-defined segment.
             - **Cluster 3**: High precision, making it a distinct segment from others, ideal for targeted campaigns.
-            """)
+            ''')
 
         # Recommendations
         with st.expander("Recommendations"):
-            st.write("""
+            st.write('''
             - **Marketing Strategy**: Tailor marketing campaigns to target each segment more effectively, maximizing customer engagement and conversion rates.
             - **Business Decision-Making**: Utilize these segments for product recommendations, personalized offers, and strategic inventory management.
-            """)
+            ''')
